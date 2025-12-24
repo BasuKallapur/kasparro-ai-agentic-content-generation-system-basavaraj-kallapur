@@ -7,7 +7,7 @@ from src.agents.orchestrator_agent import OrchestratorAgent
 
 def test_system():
     """Test the complete system pipeline."""
-    print("🧪 Testing Multi-Agent Content Generation System")
+    print("Testing Multi-Agent Content Generation System")
     
     # Test data
     product_data = {
@@ -44,7 +44,7 @@ def test_system():
             assert 'content' in data, "Should have content field"
             assert 'metadata' in data, "Should have metadata field"
     
-    print("✅ All tests passed!")
+    print("All tests passed!")
     return True
 
 

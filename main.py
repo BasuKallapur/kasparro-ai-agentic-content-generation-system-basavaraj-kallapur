@@ -39,12 +39,11 @@ def load_product_data():
 
 def main():
     """Main execution function."""
-    print("🚀 Starting Multi-Agent Content Generation System")
-    print("=" * 60)
-    
     # Setup logging
     setup_logging()
     logger = logging.getLogger("Main")
+    
+    logger.info("Starting Multi-Agent Content Generation System")
     
     try:
         # Load product data
@@ -58,25 +57,25 @@ def main():
         input_data = {'product_data': product_data}
         output_files = orchestrator.process(input_data)
         
-        # Display results
-        print("\n✅ Content Generation Completed Successfully!")
-        print("\n📄 Generated Files:")
+        # Display final results
+        print("Content Generation Completed Successfully!")
+        print("\nGenerated Files:")
         for page_type, filepath in output_files.items():
-            print(f"  • {page_type.upper()}: {filepath}")
+            print(f"  {page_type.upper()}: {filepath}")
         
-        print(f"\n📊 System Performance:")
-        print(f"  • Total Pages Generated: {len(output_files)}")
-        print(f"  • Agent Pipeline: Data Parser → Question Generator → Content Logic → Template Engine")
-        print(f"  • Output Format: Machine-readable JSON")
+        print(f"\nSystem Performance:")
+        print(f"  Total Pages Generated: {len(output_files)}")
+        print(f"  Agent Pipeline: Data Parser -> Question Generator -> Content Logic -> Template Engine")
+        print(f"  Output Format: Machine-readable JSON")
         
-        print("\n🎯 Next Steps:")
-        print("  • Review generated JSON files in the output/ directory")
-        print("  • Validate content structure and completeness")
-        print("  • Test system extensibility with additional products")
+        print("\nNext Steps:")
+        print("  Review generated JSON files in the output/ directory")
+        print("  Validate content structure and completeness")
+        print("  Test system extensibility with additional products")
         
     except Exception as e:
         logger.error("Pipeline execution failed: %s", str(e))
-        print(f"\n❌ Error: {str(e)}")
+        print(f"Error: {str(e)}")
         return 1
     
     return 0

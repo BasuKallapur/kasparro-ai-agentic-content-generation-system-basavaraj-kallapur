@@ -26,4 +26,4 @@ class BaseAgent(ABC):
     
     def log_processing(self, stage: str, details: str = ""):
         """Log processing stage."""
-        self.logger.info(f"[{self.agent_id}] {stage}: {details}")
+        self.logger.info("[%s] %s: %s", self.agent_id, stage, details)
