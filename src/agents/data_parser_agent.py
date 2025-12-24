@@ -58,9 +58,13 @@ class DataParserAgent(BaseAgent):
     def _validate_required_fields(self, data: Dict[str, Any]) -> None:
         """Validate that all required fields are present."""
         required_fields = ['name', 'concentration', 'skin_type', 'key_ingredients', 
-                          'benefits', 'usage_instructions', 'side_effects', 'price']
+                          'benefits', 'usage_instructions', 'price']
         
         missing_fields = [field for field in required_fields if field not in data]
         
         if missing_fields:
             raise ValueError(f"Missing required fields: {missing_fields}")
+        
+        # Handle optional side_effects field
+        if 'side_effects' not in data:
+            data['side_effects'] = "Not specified"
