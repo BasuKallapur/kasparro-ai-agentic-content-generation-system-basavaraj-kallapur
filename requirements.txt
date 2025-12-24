@@ -1,0 +1,2 @@
+# No external dependencies required
+# This system uses only Python standard library

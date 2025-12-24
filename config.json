@@ -1,0 +1,55 @@
+{
+  "system": {
+    "name": "Multi-Agent Content Generation System",
+    "version": "1.0.0",
+    "output_directory": "output"
+  },
+  "agents": {
+    "data_parser": {
+      "enabled": true,
+      "required_fields": [
+        "name",
+        "concentration",
+        "skin_type",
+        "key_ingredients",
+        "benefits",
+        "usage_instructions",
+        "side_effects",
+        "price"
+      ]
+    },
+    "question_generator": {
+      "enabled": true,
+      "min_questions_per_category": 2,
+      "categories": [
+        "informational",
+        "safety",
+        "usage",
+        "purchase",
+        "comparison",
+        "ingredients"
+      ]
+    },
+    "content_logic": {
+      "enabled": true,
+      "content_blocks": [
+        "benefits",
+        "usage",
+        "safety",
+        "ingredients",
+        "faq",
+        "comparison"
+      ]
+    },
+    "template_engine": {
+      "enabled": true,
+      "templates": ["faq", "product", "comparison"]
+    }
+  },
+  "output": {
+    "format": "json",
+    "indent": 2,
+    "ensure_ascii": false,
+    "include_metadata": true
+  }
+}
