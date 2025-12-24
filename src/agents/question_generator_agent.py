@@ -42,7 +42,7 @@ class QuestionGeneratorAgent(BaseAgent):
             Question(
                 text=f"What are the main benefits of {product.name}?",
                 category=QuestionCategory.INFORMATIONAL,
-                answer=f"The main benefits include {', '.join(product.benefits).lower()}."
+                answer=f"The main benefits include {', '.join([b.lower() if 'fades' not in b.lower() else b.lower().replace('fades', 'fading') for b in product.benefits])}."
             ),
             Question(
                 text="What skin types is this product suitable for?",
@@ -60,14 +60,9 @@ class QuestionGeneratorAgent(BaseAgent):
                 answer=product.side_effects
             ),
             Question(
-                text="Is this product safe for sensitive skin?",
+                text="Who might experience side effects?",
                 category=QuestionCategory.SAFETY,
-                answer="Please check the side effects section. If you have sensitive skin, consider doing a patch test first."
-            ),
-            Question(
-                text="Can I use this product during pregnancy?",
-                category=QuestionCategory.SAFETY,
-                answer="Please consult with your healthcare provider before using any skincare products during pregnancy."
+                answer="Based on the product information, sensitive skin users may experience the mentioned side effects."
             )
         ]
     
@@ -108,6 +103,7 @@ class QuestionGeneratorAgent(BaseAgent):
     
     def _generate_comparison_questions(self, product: ProductModel) -> List[Question]:
         """Generate comparison-related questions."""
+        benefits_text = ', '.join([b.lower() if 'fades' not in b.lower() else b.lower().replace('fades', 'fading') for b in product.benefits])
         return [
             Question(
                 text="How does this compare to other vitamin C serums?",
@@ -117,7 +113,7 @@ class QuestionGeneratorAgent(BaseAgent):
             Question(
                 text="What makes this product unique?",
                 category=QuestionCategory.COMPARISON,
-                answer=f"The combination of {', '.join(product.key_ingredients)} makes this product effective for {', '.join(product.benefits).lower()}."
+                answer=f"The combination of {', '.join(product.key_ingredients)} makes this product effective for {benefits_text}."
             )
         ]
     
@@ -133,5 +129,10 @@ class QuestionGeneratorAgent(BaseAgent):
                 text="What does Vitamin C do for the skin?",
                 category=QuestionCategory.INGREDIENTS,
                 answer="Vitamin C is known for its brightening properties and ability to fade dark spots."
+            ),
+            Question(
+                text="What is the concentration of active ingredients?",
+                category=QuestionCategory.INGREDIENTS,
+                answer=f"This product contains {product.concentration}."
             )
         ]

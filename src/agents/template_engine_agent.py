@@ -58,7 +58,6 @@ class TemplateEngineAgent(BaseAgent):
         
         # Populate template
         page_content = {
-            "page_type": "faq",
             "title": f"{product.name} - Frequently Asked Questions",
             "sections": {
                 "overview": {
@@ -95,7 +94,6 @@ class TemplateEngineAgent(BaseAgent):
         
         # Populate template
         page_content = {
-            "page_type": "product",
             "product_info": {
                 "name": product.name,
                 "concentration": product.concentration,
@@ -143,7 +141,6 @@ class TemplateEngineAgent(BaseAgent):
         
         # Populate template
         page_content = {
-            "page_type": "comparison",
             "title": "Product Comparison",
             "products": comparison_content["products"],
             "comparison_analysis": comparison_content["comparison_points"],
@@ -153,7 +150,8 @@ class TemplateEngineAgent(BaseAgent):
             },
             "metadata": {
                 "generated_at": datetime.now().isoformat(),
-                "source": "automated_generation"
+                "source": "automated_generation",
+                "note": "Product B is a fictional comparator created to demonstrate comparison logic"
             }
         }
         

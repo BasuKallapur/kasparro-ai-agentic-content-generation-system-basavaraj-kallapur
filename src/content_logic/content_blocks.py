@@ -10,14 +10,24 @@ class ContentLogicBlocks:
     @staticmethod
     def generate_benefits_block(product: ProductModel) -> ContentBlock:
         """Generate benefits content block."""
+        # Fix grammar for benefits
+        polished_benefits = []
+        polished_descriptions = {}
+        
+        for benefit in product.benefits:
+            if 'fades' in benefit.lower():
+                polished = benefit.replace('Fades', 'Fading').replace('fades', 'fading')
+                polished_benefits.append(polished)
+                polished_descriptions[benefit] = polished
+            else:
+                polished_benefits.append(benefit)
+                polished_descriptions[benefit] = benefit
+        
         content = {
-            "primary_benefits": product.benefits,
-            "benefit_descriptions": {
-                benefit: f"This product helps with {benefit.lower()}" 
-                for benefit in product.benefits
-            },
+            "primary_benefits": polished_benefits,
+            "benefit_descriptions": polished_descriptions,
             "skin_type_benefits": {
-                skin_type: f"Specifically formulated for {skin_type.lower()} skin"
+                skin_type: f"Formulated for {skin_type.lower()} skin"
                 for skin_type in product.skin_types
             }
         }
@@ -67,17 +77,19 @@ class ContentLogicBlocks:
     @staticmethod
     def generate_ingredients_block(product: ProductModel) -> ContentBlock:
         """Generate ingredients information content block."""
-        ingredient_info = {
-            "Vitamin C": "Antioxidant that brightens skin and fades dark spots",
-            "Hyaluronic Acid": "Hydrating ingredient that retains moisture"
-        }
+        # Only use benefits that are actually stated in the product data
+        ingredient_descriptions = {}
+        for ingredient in product.key_ingredients:
+            if ingredient == "Vitamin C" and any("brightening" in benefit.lower() or "dark spots" in benefit.lower() for benefit in product.benefits):
+                ingredient_descriptions[ingredient] = "Associated with brightening and fading dark spots as stated in product benefits"
+            elif ingredient == "Hyaluronic Acid":
+                ingredient_descriptions[ingredient] = "Hydrating ingredient"
+            else:
+                ingredient_descriptions[ingredient] = f"{ingredient} - ingredient in this formulation"
         
         content = {
             "key_ingredients": product.key_ingredients,
-            "ingredient_descriptions": {
-                ingredient: ingredient_info.get(ingredient, f"{ingredient} - skincare ingredient")
-                for ingredient in product.key_ingredients
-            },
+            "ingredient_descriptions": ingredient_descriptions,
             "concentration": product.concentration,
             "active_ingredients": [ing for ing in product.key_ingredients if "Vitamin" in ing or "Acid" in ing]
         }
