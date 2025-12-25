@@ -16,6 +16,8 @@ This will process the GlowBoost Vitamin C Serum data and generate:
 
 ## System Architecture
 
+![alt text](image.png)
+
 ### Multi-Agent Pipeline Flow
 
 ```
