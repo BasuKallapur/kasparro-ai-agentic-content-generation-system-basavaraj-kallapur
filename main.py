@@ -32,7 +32,7 @@ def load_product_data():
         'Key Ingredients': 'Vitamin C, Hyaluronic Acid',
         'Benefits': 'Brightening, Fades dark spots',
         'How to Use': 'Apply 2–3 drops in the morning before sunscreen',
-        'Side Effects': 'Mild tingling for sensitive skin',
+        # 'Side Effects': 'Mild tingling for sensitive skin',
         'Price': '₹699'
     }
 

@@ -1,6 +1,7 @@
 # Kasparro AI Agentic Content Generation System
 
 A modular multi-agent system for automated content generation from product data, designed to demonstrate production-style agentic workflows, automation graphs, and template-based content generation.
+[Video Demo](https://drive.google.com/file/d/1S11-A_K2QfgVwASO6QKWA-AJL2LfIbkP/view?usp=sharing)
 
 ## Quick Start
 
